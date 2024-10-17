@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BudgettingApp.Views.Dashboard"
+             xmlns:views="clr-namespace:BudgettingApp.Views"
+             Title="Dashboard">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Order="Primary" Priority="-1" Command="{Binding AddNewCommand}" />
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <CollectionView SelectionMode="Single"
+          ItemsSource="{Binding Items}" >
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Frame BackgroundColor="{Binding BackgroundColor}" CornerRadius="10" Padding="5">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BindingContext.EditCommand, Source={RelativeSource AncestorType={x:Type views:Dashboard}}}" CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <Label Text="{Binding Title}" TextColor="White" FontSize="Medium" HorizontalOptions="Center"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Label Text="Presupuesto: " TextColor="White" FontSize="Medium" />
+                                <Label Grid.Column="1" Text="{Binding Budget}" TextColor="White" FontSize="Medium" HorizontalOptions="End"/>
+                                <Label Grid.Row="1" Text="Gasto:" TextColor="White" FontSize="Medium" />
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Expenses}" TextColor="White" FontSize="Medium" HorizontalOptions="End"/>
+                            </Grid>
+
+
+                            <!-- Add more content here -->
+                        </StackLayout>
+                    </Frame>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
+</ContentPage>
