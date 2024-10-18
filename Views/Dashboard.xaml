@@ -8,11 +8,10 @@
         <ToolbarItem Text="Add" Order="Primary" Priority="-1" Command="{Binding AddNewCommand}" />
     </ContentPage.ToolbarItems>
     <ScrollView>
-        <CollectionView SelectionMode="Single"
+        <CollectionView SelectionMode="Single" Margin="10,0,10,0"
           ItemsSource="{Binding Items}" >
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical"
-                                Span="2" />
+                <GridItemsLayout x:Name="gridItemsLayout" Orientation="Vertical" Span="1" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>

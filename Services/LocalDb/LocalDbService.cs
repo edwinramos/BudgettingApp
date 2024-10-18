@@ -35,7 +35,7 @@ namespace BudgettingApp.Services.Cache
             var result = _collection.FindOne(expression);
             ResetConenction();
             return result;
-        }+
+        }
 
         public bool Add(T obj)
         {

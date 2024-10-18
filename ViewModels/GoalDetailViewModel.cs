@@ -47,6 +47,12 @@ namespace BudgettingApp.ViewModels
         }
 
         [RelayCommand]
+        async Task AddMovement()
+        {
+            UserDialogs.Instance.Alert("AddM");
+            //await Shell.Current.GoToAsync("Dashboard");
+        }
+        [RelayCommand]
         async Task Delete()
         {
             UserDialogs.Instance.Alert("Delete");
