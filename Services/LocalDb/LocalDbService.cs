@@ -39,13 +39,20 @@ namespace BudgettingApp.Services.Cache
 
         public bool Add(T obj)
         {
-            var m = obj as BaseModel;
-            if (string.IsNullOrEmpty(m.Key))
-                m.Key = Guid.NewGuid().ToString();
+            try
+            {
+                var m = obj as BaseModel;
+                if (string.IsNullOrEmpty(m.Key))
+                    m.Key = Guid.NewGuid().ToString();
 
-            var res = _collection.Insert(obj);
-            ResetConenction();
-            return res;
+                var res = _collection.Insert(obj);
+                ResetConenction();
+                return res;
+            }
+            catch (Exception ex) 
+            {
+            }
+            return false;
         }
 
         public bool Update(T person)

@@ -30,13 +30,15 @@ namespace BudgettingApp.ViewModels
         public Goal model;
         [ObservableProperty]
         public List<string> colorsList = new List<string>();
+        [ObservableProperty]
+        public ObservableCollection<TimePeriods> timePeriods = new ObservableCollection<TimePeriods>(Enum.GetValues(typeof(TimePeriods)) as TimePeriods[]);
         #endregion
 
         #region Commands
         [RelayCommand]
         async Task Save()
         {
-
+            Model.TimePeriod = (int)Model.DisplayTimePeriod;
             if (string.IsNullOrEmpty(Model.Key))
                 _dbDashboardItem.Add(Model);
             else
@@ -67,10 +69,12 @@ namespace BudgettingApp.ViewModels
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
+            var goal = new Goal();
             if (query.Any(x => x.Key == "item"))
-                Model = query["item"] as Goal;
-            else
-                Model = new Goal();
+                goal = query["item"] as Goal;
+
+            //goal.DisplayTimePeriod = (TimePeriods)goal.TimePeriod;
+            Model = goal;
         }
     }
 }

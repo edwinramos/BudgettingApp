@@ -26,11 +26,14 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <Label Text="Presupuesto: " TextColor="White" FontSize="Medium" />
-                                <Label Grid.Column="1" Text="{Binding Budget}" TextColor="White" FontSize="Medium" HorizontalOptions="End"/>
-                                <Label Grid.Row="1" Text="Gasto:" TextColor="White" FontSize="Medium" />
-                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Expenses}" TextColor="White" FontSize="Medium" HorizontalOptions="End"/>
+                                <Label Text="Periodo:" TextColor="White" FontSize="Medium" />
+                                <Label Grid.Column="1" Text="{Binding DisplayTimePeriod}" TextColor="White" FontSize="Medium" HorizontalOptions="End"/>
+                                <Label Grid.Row="1" Text="Presupuesto: " TextColor="White" FontSize="Medium" />
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Budget}" TextColor="White" FontSize="Medium" HorizontalOptions="End"/>
+                                <Label Grid.Row="2" Text="Gasto:" TextColor="White" FontSize="Medium" />
+                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding Expenses}" TextColor="White" FontSize="Medium" HorizontalOptions="End"/>
                             </Grid>
 
 

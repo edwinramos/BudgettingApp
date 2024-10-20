@@ -20,6 +20,14 @@
             <Label Text="Expenses"/>
             <Entry Text="{Binding Model.Expenses}" Keyboard="Numeric"/>
 
+            <Label Text="Start Date:" FontAttributes="Bold" />
+            <DatePicker Date="{Binding Model.StartDate}" />
+
+            <Label Text="Time Period:" FontAttributes="Bold" />
+            <Picker ItemsSource="{Binding TimePeriods}" 
+                SelectedItem="{Binding Model.DisplayTimePeriod}"
+                Title="Select Time Period"/>
+
             <Button Text="Save" Command="{Binding SaveCommand}"/>
 
             <toolkit:Expander>
