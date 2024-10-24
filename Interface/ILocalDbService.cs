@@ -17,6 +17,6 @@ namespace BudgettingApp.Interfaces
 
         public bool Update(T person);
 
-        public bool Delete(int id);
+        public bool Delete(string id);
     }
 }

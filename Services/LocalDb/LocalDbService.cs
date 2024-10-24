@@ -35,17 +35,24 @@ namespace BudgettingApp.Services.Cache
             var result = _collection.FindOne(expression);
             ResetConenction();
             return result;
-        }+
+        }
 
         public bool Add(T obj)
         {
-            var m = obj as BaseModel;
-            if (string.IsNullOrEmpty(m.Key))
-                m.Key = Guid.NewGuid().ToString();
+            try
+            {
+                var m = obj as BaseModel;
+                if (string.IsNullOrEmpty(m.Key))
+                    m.Key = Guid.NewGuid().ToString();
 
-            var res = _collection.Insert(obj);
-            ResetConenction();
-            return res;
+                var res = _collection.Insert(obj);
+                ResetConenction();
+                return res;
+            }
+            catch (Exception ex) 
+            {
+            }
+            return false;
         }
 
         public bool Update(T person)
@@ -55,9 +62,9 @@ namespace BudgettingApp.Services.Cache
             return res;
         }
 
-        public bool Delete(int id)
+        public bool Delete(string key)
         {
-            return _collection.Delete(id);
+            return _collection.Delete(key);
         }
 
         private void ResetConenction()

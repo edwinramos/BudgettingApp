@@ -7,6 +7,7 @@ using BudgettingApp.Services.Cache;
 using BudgettingApp.Interfaces;
 using BudgettingApp.Models;
 using Controls.UserDialogs.Maui;
+using CommunityToolkit.Maui.Core;
 
 namespace BudgettingApp
 {
@@ -40,7 +41,9 @@ namespace BudgettingApp
         {
             //mauiAppBuilder.Services.AddTransient<ILoggingService, LoggingService>();
             //mauiAppBuilder.Services.AddTransient<ISettingsService, SettingsService>();
+            //mauiAppBuilder.Services.AddTransient<IPopupService>();
             mauiAppBuilder.Services.AddTransient<ILocalDbService<Goal>, LocalDbService<Goal>>();
+            mauiAppBuilder.Services.AddTransient<ILocalDbService<Expense>, LocalDbService<Expense>>();
             // More services registered here.
 
             return mauiAppBuilder;
@@ -50,6 +53,7 @@ namespace BudgettingApp
         {
             mauiAppBuilder.Services.AddSingleton<DashboardViewModel>();
             mauiAppBuilder.Services.AddSingleton<GoalDetailViewModel>();
+            mauiAppBuilder.Services.AddSingleton<ExpensePopupViewModel>();
 
             // More view-models registered here.
 

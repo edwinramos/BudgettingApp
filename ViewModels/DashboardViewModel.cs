@@ -54,6 +54,7 @@ namespace BudgettingApp.ViewModels
             var ls = _dbDashboardItem.GetAll();
             foreach (var item in ls)
             {
+                item.DisplayTimePeriod = (TimePeriods)item.TimePeriod;
                 Items.Add(item);
             }
 

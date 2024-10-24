@@ -6,41 +6,83 @@
             Title="Goal Detail"
             x:Class="BudgettingApp.Views.Goal.GoalDetail"
             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
-    <VerticalStackLayout Margin="10,0,10,0">
-        <Label Text="Title"/>
-        <Entry Text="{Binding Model.Title}"/>
+    <ScrollView>
+        <VerticalStackLayout Margin="10,0,10,0">
+            <Label Text="Title"/>
+            <Entry Text="{Binding Model.Title}"/>
 
-        <Label Text="Color"/>
-        <Picker ItemsSource="{Binding ColorsList}" SelectedItem="{Binding Model.BackgroundColor, Mode=TwoWay}"/>
+            <Label Text="Color"/>
+            <Picker ItemsSource="{Binding ColorsList}" SelectedItem="{Binding Model.BackgroundColor, Mode=TwoWay}"/>
 
-        <Label Text="Budget"/>
-        <Entry Text="{Binding Model.Budget}" Keyboard="Numeric"/>
+            <Label Text="Budget"/>
+            <Entry Text="{Binding Model.Budget}" Keyboard="Numeric"/>
 
-        <Label Text="Expenses"/>
-        <Entry Text="{Binding Model.Expenses}" Keyboard="Numeric" IsEnabled="False"/>
+            <Label Text="Expenses" IsVisible="{Binding CanEditItem}"/>
+            <Entry Text="{Binding Model.Expenses}" Keyboard="Numeric" IsEnabled="False" IsVisible="{Binding CanEditItem}"/>
 
-        <Button Text="Save" Command="{Binding SaveCommand}"/>
+            <Label Text="Start Date:" FontAttributes="Bold" />
+            <DatePicker Date="{Binding Model.StartDate}" />
 
-        <toolkit:Expander>
-            <toolkit:Expander.Header>
-                <Frame HeightRequest="50" BackgroundColor="LightBlue">
-                    <Label Text="View Movements"
-               FontAttributes="Bold"
-               FontSize="Medium" />
+            <Label Text="Time Period:" FontAttributes="Bold" />
+            <Picker ItemsSource="{Binding TimePeriods}" 
+                SelectedItem="{Binding Model.DisplayTimePeriod}"
+                Title="Select Time Period"/>
+
+            <Button Text="Save" Command="{Binding SaveCommand}"/>
+
+            <toolkit:Expander IsVisible="{Binding CanEditItem}">
+                <toolkit:Expander.Header>
+                    <Frame HeightRequest="50" BackgroundColor="LightBlue" Padding="10,0,10,0" VerticalOptions="Center">
+                        <Grid HorizontalOptions="FillAndExpand">
+                            <Label Text="View Movements" VerticalOptions="Center"
+               FontAttributes="Bold"/>
+                            <Button Grid.Column="1" Text="Add" VerticalOptions="Center" HorizontalOptions="End"
+               FontAttributes="Bold" Command="{Binding AddMovementCommand}"/>
+                        </Grid>
+                    </Frame>
+                </toolkit:Expander.Header>
+                <Frame BorderColor="LightBlue" CornerRadius="5" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Fecha" FontAttributes="Bold" />
+                            <Label Grid.Column="1" Text="Comentarios" FontAttributes="Bold" HorizontalOptions="Center"/>
+                            <Label Grid.Column="2" Text="Monto" HorizontalOptions="End" />
+                        </Grid>
+                        <BoxView Grid.Row="1" HeightRequest="1"/>
+                        <ListView Grid.Row="2" x:Name="ListViewItems" ItemsSource="{Binding Expenses}" SeparatorVisibility="Default" VerticalScrollBarVisibility="Never">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding Path=BindingContext.DeleteExpenseCommand, Source={x:Reference ListViewItems}}" CommandParameter="{Binding .}" />
+                                            </Grid.GestureRecognizers>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding ExpenseDateTime, StringFormat='{0:dd/MM/yyyy}'}" FontAttributes="Bold" />
+                                            <Label Grid.Column="1" Text="{Binding Comment}" FontAttributes="Bold" HorizontalOptions="Center"/>
+                                            <Label Grid.Column="2" Text="{Binding ExpenseAmount, StringFormat='{0:C}'}" HorizontalOptions="End" />
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
                 </Frame>
-            </toolkit:Expander.Header>
-            <HorizontalStackLayout Padding="10">
-                <Frame BorderColor="LightBlue" CornerRadius="5">
-                    <StackLayout>
-                        <Image Source="http://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Papio_anubis_%28Serengeti%2C_2009%29.jpg/200px-Papio_anubis_%28Serengeti%2C_2009%29.jpg"
-               Aspect="AspectFill"
-               HeightRequest="120"
-               WidthRequest="120" />
-                        <Label Text="Baboons are African and Arabian Old World monkeys belonging to the genus Papio, part of the subfamily Cercopithecinae."
-               FontAttributes="Italic" />
-                    </StackLayout>
-                </Frame>
-            </HorizontalStackLayout>
-        </toolkit:Expander>
-    </VerticalStackLayout>
+            </toolkit:Expander>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

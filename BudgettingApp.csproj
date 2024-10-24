@@ -89,10 +89,9 @@
 	  <MauiXaml Update="Views\Goal\GoalDetail.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Views\Goal\Templates\" />
+	  <MauiXaml Update="Views\Goal\Templates\ExpensePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>
