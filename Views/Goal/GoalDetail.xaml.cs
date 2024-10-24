@@ -16,6 +16,6 @@ public partial class GoalDetail : ContentPage
     {
         base.OnAppearing();
 
-        //Model.Refresh();
+        //Model.RefreshExpenses();
     }
 }

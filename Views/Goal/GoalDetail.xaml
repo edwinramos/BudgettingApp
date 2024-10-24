@@ -17,8 +17,8 @@
             <Label Text="Budget"/>
             <Entry Text="{Binding Model.Budget}" Keyboard="Numeric"/>
 
-            <Label Text="Expenses"/>
-            <Entry Text="{Binding Model.Expenses}" Keyboard="Numeric"/>
+            <Label Text="Expenses" IsVisible="{Binding CanEditItem}"/>
+            <Entry Text="{Binding Model.Expenses}" Keyboard="Numeric" IsEnabled="False" IsVisible="{Binding CanEditItem}"/>
 
             <Label Text="Start Date:" FontAttributes="Bold" />
             <DatePicker Date="{Binding Model.StartDate}" />
@@ -30,7 +30,7 @@
 
             <Button Text="Save" Command="{Binding SaveCommand}"/>
 
-            <toolkit:Expander>
+            <toolkit:Expander IsVisible="{Binding CanEditItem}">
                 <toolkit:Expander.Header>
                     <Frame HeightRequest="50" BackgroundColor="LightBlue" Padding="10,0,10,0" VerticalOptions="Center">
                         <Grid HorizontalOptions="FillAndExpand">
@@ -41,10 +41,45 @@
                         </Grid>
                     </Frame>
                 </toolkit:Expander.Header>
-                <Frame BorderColor="LightBlue" CornerRadius="5">
-                    <Grid HorizontalOptions="FillAndExpand">
-                        <Label Text="PicaPollo"/>
-                        <Label Grid.Column="1" Text="{Binding Model.Expenses, StringFormat='{0:C}'}" HorizontalOptions="End"/>
+                <Frame BorderColor="LightBlue" CornerRadius="5" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Fecha" FontAttributes="Bold" />
+                            <Label Grid.Column="1" Text="Comentarios" FontAttributes="Bold" HorizontalOptions="Center"/>
+                            <Label Grid.Column="2" Text="Monto" HorizontalOptions="End" />
+                        </Grid>
+                        <BoxView Grid.Row="1" HeightRequest="1"/>
+                        <ListView Grid.Row="2" x:Name="ListViewItems" ItemsSource="{Binding Expenses}" SeparatorVisibility="Default" VerticalScrollBarVisibility="Never">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding Path=BindingContext.DeleteExpenseCommand, Source={x:Reference ListViewItems}}" CommandParameter="{Binding .}" />
+                                            </Grid.GestureRecognizers>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding ExpenseDateTime, StringFormat='{0:dd/MM/yyyy}'}" FontAttributes="Bold" />
+                                            <Label Grid.Column="1" Text="{Binding Comment}" FontAttributes="Bold" HorizontalOptions="Center"/>
+                                            <Label Grid.Column="2" Text="{Binding ExpenseAmount, StringFormat='{0:C}'}" HorizontalOptions="End" />
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </Grid>
                 </Frame>
             </toolkit:Expander>

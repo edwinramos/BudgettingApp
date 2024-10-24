@@ -62,9 +62,9 @@ namespace BudgettingApp.Services.Cache
             return res;
         }
 
-        public bool Delete(int id)
+        public bool Delete(string key)
         {
-            return _collection.Delete(id);
+            return _collection.Delete(key);
         }
 
         private void ResetConenction()
