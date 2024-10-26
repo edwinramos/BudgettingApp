@@ -3,12 +3,11 @@
     x:Class="BudgettingApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:BudgettingApp"
     xmlns:views="clr-namespace:BudgettingApp.Views"
-    Shell.FlyoutBehavior="Flyout"
+    Shell.FlyoutBehavior="Disabled"
     Title="BudgettingApp">
 
-    <FlyoutItem Title="Dashboard">
+    <!--<FlyoutItem Title="Dashboard">
         <Tab>
             <ShellContent
      Title="Dashboard"
@@ -20,19 +19,19 @@
         <Tab>
             <ShellContent
     Title="Home"
-    ContentTemplate="{DataTemplate local:MainPage}"
+    ContentTemplate="{DataTemplate views:MainPage}"
     Route="MainPage" />
         </Tab>
-    </FlyoutItem>
-    <!--<TabBar>
-        <Tab Title="Domestic">
-            <ShellContent Title="Cats"
+    </FlyoutItem>-->
+    <TabBar>
+        <Tab>
+            <ShellContent Title="Actives"
                      ContentTemplate="{DataTemplate views:Dashboard}" />
-            <ShellContent Title="Dogs"
+            <ShellContent Title="Expired"
                      ContentTemplate="{DataTemplate views:Dashboard}" />
         </Tab>
-        <Tab Title="Monkeys">
-            <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
-        </Tab>
-    </TabBar>-->
+        <!--<Tab Title="Monkeys">
+            <ShellContent ContentTemplate="{DataTemplate views:MainPage}" />
+        </Tab>-->
+    </TabBar>
 </Shell>
