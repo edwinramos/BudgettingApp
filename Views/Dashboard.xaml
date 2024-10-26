@@ -19,6 +19,7 @@
                     <Frame BackgroundColor="{Binding BackgroundColor}" CornerRadius="10" Padding="5">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding BindingContext.EditCommand, Source={RelativeSource AncestorType={x:Type views:Dashboard}}}" CommandParameter="{Binding .}"/>
+                            <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type views:Dashboard}}}" CommandParameter="{Binding .}"/>
                         </Frame.GestureRecognizers>
                         <StackLayout>
                             <Label Text="{Binding Title}" TextColor="White" FontSize="Medium" HorizontalOptions="Center"/>

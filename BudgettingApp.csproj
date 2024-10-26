@@ -80,6 +80,9 @@
 	  <Compile Update="Views\Dashboard.xaml.cs">
 	    <DependentUpon>Dashboard.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Goal\MovementsPage.xaml.cs">
+	    <DependentUpon>MovementsPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>

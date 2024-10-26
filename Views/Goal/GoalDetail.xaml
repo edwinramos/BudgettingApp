@@ -11,9 +11,6 @@
             <Label Text="Title"/>
             <Entry Text="{Binding Model.Title}"/>
 
-            <Label Text="Color"/>
-            <Picker ItemsSource="{Binding ColorsList}" SelectedItem="{Binding Model.BackgroundColor, Mode=TwoWay}"/>
-
             <Label Text="Budget"/>
             <Entry Text="{Binding Model.Budget}" Keyboard="Numeric"/>
 
@@ -29,60 +26,8 @@
                 Title="Select Time Period"/>
 
             <Button Text="Save" Command="{Binding SaveCommand}"/>
-
-            <toolkit:Expander IsVisible="{Binding CanEditItem}">
-                <toolkit:Expander.Header>
-                    <Frame HeightRequest="50" BackgroundColor="LightBlue" Padding="10,0,10,0" VerticalOptions="Center">
-                        <Grid HorizontalOptions="FillAndExpand">
-                            <Label Text="View Movements" VerticalOptions="Center"
-               FontAttributes="Bold"/>
-                            <Button Grid.Column="1" Text="Add" VerticalOptions="Center" HorizontalOptions="End"
-               FontAttributes="Bold" Command="{Binding AddMovementCommand}"/>
-                        </Grid>
-                    </Frame>
-                </toolkit:Expander.Header>
-                <Frame BorderColor="LightBlue" CornerRadius="5" >
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Label Text="Fecha" FontAttributes="Bold" />
-                            <Label Grid.Column="1" Text="Comentarios" FontAttributes="Bold" HorizontalOptions="Center"/>
-                            <Label Grid.Column="2" Text="Monto" HorizontalOptions="End" />
-                        </Grid>
-                        <BoxView Grid.Row="1" HeightRequest="1"/>
-                        <ListView Grid.Row="2" x:Name="ListViewItems" ItemsSource="{Binding Expenses}" SeparatorVisibility="Default" VerticalScrollBarVisibility="Never">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ViewCell>
-                                        <Grid>
-                                            <Grid.GestureRecognizers>
-                                                <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding Path=BindingContext.DeleteExpenseCommand, Source={x:Reference ListViewItems}}" CommandParameter="{Binding .}" />
-                                            </Grid.GestureRecognizers>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-                                            <Label Text="{Binding ExpenseDateTime, StringFormat='{0:dd/MM/yyyy}'}" FontAttributes="Bold" />
-                                            <Label Grid.Column="1" Text="{Binding Comment}" FontAttributes="Bold" HorizontalOptions="Center"/>
-                                            <Label Grid.Column="2" Text="{Binding ExpenseAmount, StringFormat='{0:C}'}" HorizontalOptions="End" />
-                                        </Grid>
-                                    </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </Grid>
-                </Frame>
-            </toolkit:Expander>
+            
+            <Button Text="View Movements" IsVisible="{Binding CanEditItem}" Command="{Binding ShowMovementsCommand}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

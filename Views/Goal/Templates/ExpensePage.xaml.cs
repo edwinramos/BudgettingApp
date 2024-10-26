@@ -20,8 +20,8 @@ public partial class ExpensePage : Popup
 		Model.Init(this);
 		Closed += async (s, e) => 
 		{
-            var vm = App.Current.MainPage.Handler.MauiContext.Services.GetService<GoalDetailViewModel>();
-			await vm.RefreshExpenses();
+            var vm = App.Current.MainPage.Handler.MauiContext.Services.GetService<MovementsViewModel>();
+			await vm.RefreshExpenses(goalKey);
         };
 	}
 }

@@ -9,7 +9,7 @@ namespace BudgettingApp
         {
             InitializeComponent();
             Routing.RegisterRoute("Dashboard", typeof(Dashboard));
-            Routing.RegisterRoute("MainPage", typeof(MainPage));
+            Routing.RegisterRoute("MovementsPage", typeof(MovementsPage));
             Routing.RegisterRoute("GoalDetail", typeof(GoalDetail));
         }
     }

@@ -53,6 +53,7 @@ namespace BudgettingApp
         {
             mauiAppBuilder.Services.AddSingleton<DashboardViewModel>();
             mauiAppBuilder.Services.AddSingleton<GoalDetailViewModel>();
+            mauiAppBuilder.Services.AddSingleton<MovementsViewModel>();
             mauiAppBuilder.Services.AddSingleton<ExpensePopupViewModel>();
 
             // More view-models registered here.
@@ -62,7 +63,7 @@ namespace BudgettingApp
 
         public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
         {
-            mauiAppBuilder.Services.AddSingleton<MainPage>();
+            mauiAppBuilder.Services.AddSingleton<MovementsPage>();
             mauiAppBuilder.Services.AddSingleton<Dashboard>();
             mauiAppBuilder.Services.AddSingleton<GoalDetail>();
 

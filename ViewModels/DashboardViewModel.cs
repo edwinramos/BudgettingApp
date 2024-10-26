@@ -15,10 +15,11 @@ namespace BudgettingApp.ViewModels
     public partial class DashboardViewModel : ObservableObject
     {
         ILocalDbService<Goal> _dbDashboardItem;
-        public DashboardViewModel(ILocalDbService<Goal> dbDashboardItem)
+        ILocalDbService<Expense> _dbExpenseItem;
+        public DashboardViewModel(ILocalDbService<Goal> dbDashboardItem, ILocalDbService<Expense> dbExpenseItem)
         {
             _dbDashboardItem = dbDashboardItem;
-
+            _dbExpenseItem = dbExpenseItem;
 
         }
 
@@ -42,10 +43,19 @@ namespace BudgettingApp.ViewModels
              await Shell.Current.GoToAsync("GoalDetail", navigationParameter);
         }
         [RelayCommand]
-        async Task Delete()
+        async Task Delete(Goal item)
         {
-            UserDialogs.Instance.Alert("Delete");
-            //await Shell.Current.GoToAsync("Dashboard");
+            var res = await Shell.Current.CurrentPage.DisplayAlert("Delete", "Do you want to delete this item?", "Yes", "No");
+            if (res)
+            {
+                var ls = _dbExpenseItem.GetAll().Where(x => x.GoalKey == item.Key);
+                foreach (var l in ls) 
+                {
+                    _dbExpenseItem.Delete(l.Key);
+                }
+                _dbDashboardItem.Delete(item.Key);
+                Refresh();
+            }
         }
         #endregion
         public void Refresh()
